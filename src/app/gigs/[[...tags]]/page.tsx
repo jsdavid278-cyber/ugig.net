@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Header } from "@/components/layout/Header";
 import { parsePageParam } from "@/lib/pagination";
 import { escapePostgrestSearchValue } from "@/lib/security/sanitize";
+import { hasActiveGigFilters } from "@/lib/gigs/filters";
 import { Briefcase } from "lucide-react";
 
 interface GigsPageProps {
@@ -165,7 +166,7 @@ async function GigsList({
             : "No gigs posted yet. Be the first to post one!"}
         </p>
         <div className="flex items-center justify-center gap-3 mt-4">
-          {tagList.length > 0 && (
+          {hasActiveGigFilters(queryParams, tagList) && (
             <Link href="/gigs" className="text-primary hover:underline">
               Clear filters
             </Link>
